@@ -1,0 +1,8 @@
+---testing vulnerable_heap_function---
+SAFE before UAF: SAFE
+SAFE after UAF: UNSAFE
+
+---testing vulnerable_stack_function---
+Please do not print anything longer than 64 characters!
+Your input: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA�RUUUU
+Oops! You are hacked!

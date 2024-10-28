@@ -1,0 +1,51 @@
+=================================================================
+==3378104==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7fffffffdd88 at pc 0x7ffff761058d bp 0x7fffffffdcf0 sp 0x7fffffffd498
+WRITE of size 8 at 0x7fffffffdd88 thread T0
+    #0 0x7ffff761058c in __interceptor_memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors.inc:790
+    #1 0x5555555568c7 in vulnerable_stack_function /home/haoyu/workspace/course_project/my_code/raw_vulnerable.c:64
+    #2 0x55555555695e in main /home/haoyu/workspace/course_project/my_code/raw_vulnerable.c:93
+    #3 0x7ffff7384082 in __libc_start_main ../csu/libc-start.c:308
+    #4 0x5555555562ad in _start (/home/haoyu/workspace/course_project/my_code/raw_vulnerable+0x22ad)
+
+Address 0x7fffffffdd88 is located in stack of thread T0 at offset 136 in frame
+    #0 0x5555555567c6 in vulnerable_stack_function /home/haoyu/workspace/course_project/my_code/raw_vulnerable.c:57
+
+  This frame has 2 object(s):
+    [32, 40) 'secret_addr' (line 58)
+    [64, 128) 'buffer' (line 61) <== Memory access at offset 136 overflows this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors.inc:790 in __interceptor_memcpy
+Shadow bytes around the buggy address:
+  0x10007fff7b60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007fff7b70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007fff7b80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007fff7b90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007fff7ba0: f1 f1 f1 f1 00 f2 f2 f2 00 00 00 00 00 00 00 00
+=>0x10007fff7bb0: f3[f3]f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007fff7bc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007fff7bd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007fff7be0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007fff7bf0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007fff7c00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==3378104==ABORTING
